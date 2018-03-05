@@ -12,6 +12,7 @@ namespace illam
             //MainPage = new NavigationPage(new Test());
             MainPage = new NavigationPage(new ListViewSample());
             //MainPage = new NavigationPage(new Exercise());
+            //Chcking
         }
 
         protected override void OnStart()
