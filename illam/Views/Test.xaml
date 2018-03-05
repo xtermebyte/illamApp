@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:illam;assembly=illam"
+    x:Class="illam.Views.Test">
+	<ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding Title1}"></Label>
+            <StackLayout Orientation="Horizontal">
+                    <Entry x:Name="pwd" WidthRequest="75"></Entry>
+                    <Button Clicked="Handle_Clicked" Text="Check"></Button>
+                    <Button Text="Refresh" Clicked="Handle_RefreshClicked"></Button>
+                </StackLayout>
+            <Image x:Name="testImg">
+            <Image.Source>
+                <FileImageSource File="q4343434.PNG" />
+            </Image.Source>
+            </Image>
+            <ListView x:Name="questionList" RowHeight="250" ItemsSource="{Binding data, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                        <StackLayout Orientation="Horizontal" HeightRequest="170">
+                                <Label Text="{Binding QuestionNumber}" VerticalOptions="Center"></Label>
+                                <Label Text="{Binding OrgQuestion}" VerticalOptions="Center" FontSize="10"></Label>
+                                <Image Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                        <Image.Source>
+                                            <FileImageSource File="{Binding ImageURL}" />
+                                        </Image.Source>
+                                    </Image>
+                            </StackLayout>  
+                            <StackLayout Orientation="Horizontal" HeightRequest="50">
+                                <Label Text="Answer" VerticalOptions="Center"></Label>
+                                <Button Text="A" VerticalOptions="Center" BorderColor="Black" BorderWidth="1" WidthRequest="100" HeightRequest="50"
+                                        Clicked="Handle_ClickedQuestion" BackgroundColor="{Binding ColorA, Mode=TwoWay}" CommandParameter ="{Binding}"></Button>
+                                <Button Text="B" VerticalOptions="Center" BorderColor="Black" BorderWidth="1" WidthRequest="100" HeightRequest="50"
+                                        Clicked="Handle_ClickedQuestion" BackgroundColor="{Binding ColorB, Mode=TwoWay}" CommandParameter ="{Binding}"></Button>
+                                <Button Text="C" VerticalOptions="Center" BorderColor="Black" BorderWidth="1" WidthRequest="100" HeightRequest="50"
+                                        Clicked="Handle_ClickedQuestion" BackgroundColor="{Binding ColorC, Mode=TwoWay}" CommandParameter ="{Binding}"></Button>
+                                <Button Text="D" VerticalOptions="Center" BorderColor="Black" BorderWidth="1" WidthRequest="100" HeightRequest="50"
+                                        Clicked="Handle_ClickedQuestion" BackgroundColor="{Binding ColorD, Mode=TwoWay}" CommandParameter ="{Binding}"></Button>
+                                <Image IsVisible="{Binding IsCorrect}">
+                                 <Image.Source>
+                                    <FileImageSource File="{Binding RightImageURL}" />
+                                 </Image.Source>
+                                </Image>
+                                <Image IsVisible="{Binding IsWrong}">
+                                 <Image.Source>
+                                    <FileImageSource File="{Binding WrongImageURL}" />
+                                 </Image.Source>
+                                </Image>
+                            </StackLayout>
+
+                        </StackLayout>
+                    </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+        </StackLayout>
+	</ContentPage.Content>
+</ContentPage>

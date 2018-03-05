@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="illam.Views.DashBoard">
+	<ContentPage.Content>
+    <ScrollView>
+            <StackLayout>
+                <Label Text="Welcome to Illam Dashboard"></Label>
+
+                <Button Text="Hariesh Test" Clicked="Handle_Clicked"></Button>
+
+                <Button Text="Exercises" Clicked="Handle_ExerciseClicked"></Button>
+            </StackLayout>
+    </ScrollView>
+        
+	</ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:illam.Extensions;assembly=illam"
+    x:Class="illam.Views.BehaviourTriggerSample">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ImageSoourceConvertor x:Key="imageConvert" Param1="test"></local:ImageSoourceConvertor>
+            <local:GenericConvertor x:Key="colorConvert" x:TypeArguments="Color" TrueValue="Green" FalseValue="Red"></local:GenericConvertor>
+            <local:GenericConvertor x:Key="textConvert" x:TypeArguments="x:String" TrueValue="On" FalseValue="Off"></local:GenericConvertor>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+	<ContentPage.Content>
+        <StackLayout>
+            <Label Text="Find the Behaviour sample below. The textbox is a number only"></Label>
+            <Entry Text="" BackgroundColor="Gray">
+                <Entry.Behaviors>
+                    <local:NumberBehaviour />
+                </Entry.Behaviors>
+            </Entry>
+                
+            <Label Text="Property Trigger"></Label>
+            <Editor Text="Prperty trigger editor, click here"  BackgroundColor="Gray">
+                <Editor.Triggers>
+                    <Trigger TargetType="Editor" Property="IsFocused" Value="True">
+                        <Setter Property="BackgroundColor" Value="Green"></Setter>
+                        <Setter Property="FontAttributes" Value="Bold"></Setter>
+                    </Trigger>
+                </Editor.Triggers>
+            </Editor>
+
+            <Label Text="Data Trigger">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference DataTriggerEntry}, Path=IsFocused}" Value="True">
+                        <Setter Property="BackgroundColor" Value="Green"></Setter>
+                        <Setter Property="FontAttributes" Value="Bold"></Setter>
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+            <Editor x:Name="DataTriggerEntry" Text="Datas trigger editor, click here"  BackgroundColor="Gray">
+                
+            </Editor>
+
+            <Label Text="Event Trigger">
+            </Label>
+            <Editor x:Name="Event" Text="Event trigger editor, click here adn delete all text"  BackgroundColor="Gray">
+                <Editor.Triggers>
+                   <EventTrigger Event="TextChanged">
+                        <local:RequiredTriggerAction />
+                    </EventTrigger>
+                </Editor.Triggers>
+            </Editor>
+
+            <Label Text="Sample demostrating Binding Convertors, Binding string source to a file image"></Label>
+            <Image x:Name="testImg" Source="{Binding ImageName, Converter={StaticResource imageConvert}}">
+            </Image>
+
+            <Switch x:Name="Toggler"></Switch>
+            <Label Text="Sample demostrating Binding Genric Convertors: bool to color, toggle the swtich below">
+                <Label.TextColor>
+                    <Binding Source="{x:Reference Toggler}" Path="IsToggled">
+                        <Binding.Converter>
+                            <local:GenericConvertor x:TypeArguments="Color" TrueValue="Green" FalseValue="Red">
+                            </local:GenericConvertor>
+                        </Binding.Converter>
+                    </Binding>
+                </Label.TextColor>
+            </Label>
+
+            <Label Text="Sample demostrating Binding Genric Convertors: bool to color, using inline toggle the swtich below"
+                TextColor="{Binding Source={x:Reference Toggler}, Path=IsToggled, Converter={StaticResource colorConvert}}" 
+                >
+            </Label>
+
+            <Label Text="{Binding Source={x:Reference Toggler}, Path=IsToggled, Converter={StaticResource textConvert}}"></Label>
+
+        </StackLayout>
+	</ContentPage.Content>
+</ContentPage>

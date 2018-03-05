@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:illam.Extensions;assembly=illam"
+    x:Class="illam.Views.ListViewSample">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+        <local:ItemSelector x:Key="CustomCell"></local:ItemSelector>
+            <Style x:Key="BaseLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Red"></Setter>
+            </Style>
+
+            <Style x:Key="HeaderLabel" TargetType="Label" BasedOn="{StaticResource BaseLabel}">
+                <Setter Property="FontSize" Value="20"></Setter>
+            </Style>
+
+            <Style TargetType="ListView">
+                <Setter Property="SeparatorVisibility" Value="None"></Setter>
+                <Setter Property="HasUnevenRows" Value="true"></Setter>
+            </Style>
+            </ResourceDictionary>
+    </ContentPage.Resources>
+	<ContentPage.Content>
+        <ContentView>
+        <ScrollView>
+        <StackLayout VerticalOptions="FillAndExpand">
+        <Label Text="Sample List View for audio tracks: Custom Grid List with CustomCell" Style="{StaticResource HeaderLabel}"></Label>
+                <StackLayout>
+            <ListView ItemsSource="{Binding MovieList}" ItemTemplate="{StaticResource CustomCell}" >
+                    <ListView.Footer>
+                </ListView.Footer>
+            </ListView>
+                    </StackLayout>
+                
+             <Label Text="Sample List View for audio tracks: Custom Grid List"></Label>
+            <ListView ItemsSource="{Binding MovieList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding MovieName}"></Label>
+                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding MovieDesc}"></Label>
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding MovieRating}"></Label>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            <Label Text="Sample List View for audio tracks: Simple List"></Label>
+            <ListView ItemsSource="{Binding MovieList}" VerticalOptions="End">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding MovieName}"></TextCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Label Text="Sample List View for audio tracks: Custom List"></Label>
+            <ListView ItemsSource="{Binding MovieList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding MovieName}"></Label>
+                                <StackLayout Orientation="Horizontal">
+                                     <Label Text="{Binding MovieDesc}"></Label>
+                                     <Label Text="{Binding MovieRating}"></Label>
+                                </StackLayout>
+                                    
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+</StackLayout>
+            </ScrollView>
+            </ContentView>
+	</ContentPage.Content>
+</ContentPage>
